@@ -1,0 +1,20 @@
+version: '2.3'
+services:
+    # sender:
+    #     build: ./01_sender
+    #     command: python3 sender.py
+    #     ports: 
+    #         - 5557:5557
+    #     environment:
+    #         - PYTHONUNBUFFERED=1
+    #     devices:
+    #         - /dev/video0:/dev/video0
+    zmq:
+        build: ./zmq
+        command: sh runserver.sh
+        volumes:
+            - ./zmq:/zmq
+        ports:
+            - 5558:5558
+        environment:
+            - PYTHONUNBUFFERED=1
