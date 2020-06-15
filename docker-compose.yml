@@ -1,14 +1,19 @@
 version: '2.3'
+networks: 
+    zmq:
+        external: true
 services:
-    # sender:
-    #     build: ./01_sender
-    #     command: python3 sender.py
-    #     ports: 
-    #         - 5557:5557
-    #     environment:
-    #         - PYTHONUNBUFFERED=1
-    #     devices:
-    #         - /dev/video0:/dev/video0
+    sender:
+        build: ./01_sender
+        command: python3 sender.py
+        ports: 
+            - 5557:5557
+        networks: 
+            - zmq
+        environment:
+            - PYTHONUNBUFFERED=1
+        devices:
+            - /dev/video0:/dev/video0
     zmq:
         build: ./zmq
         command: sh runserver.sh
@@ -16,5 +21,7 @@ services:
             - ./zmq:/zmq
         ports:
             - 5558:5558
+        networks: 
+            - zmq
         environment:
             - PYTHONUNBUFFERED=1

@@ -3,7 +3,7 @@ import zmq
 
 context = zmq.Context()
 zmq_socket = context.socket(zmq.PULL)
-zmq_socket.bind("tcp://127.0.0.1:5558")
+zmq_socket.connect("tcp://127.0.0.1:5558")
 
 while True:
     frame = zmq_socket.recv_pyobj()['frame']
