@@ -4,9 +4,10 @@ import numpy
 
 def server():
     print("ZMQ server starting ... ")
-    context = zmq.Context()
+    # context = zmq.Context()
+    context = zmq.Context(io_threads=8)
     consumer_receiver = context.socket(zmq.PULL)
-    consumer_receiver.connect("tcp://sender:5557")
+    consumer_receiver.connect("tcp://localhost:5557")
 
     consumer_sender = context.socket(zmq.PUSH)
     consumer_sender.bind("tcp://*:5558")
