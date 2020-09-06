@@ -1,4 +1,7 @@
 version: '2.3'
+networks:
+    zmq:
+        external : true
 services:
     # sender:
     #     build: ./01_sender
@@ -14,6 +17,8 @@ services:
         command: sh runserver.sh
         volumes:
             - ./zmq:/zmq
+        networks: 
+            - zmq
         ports:
             - 5558:5558
         environment:
